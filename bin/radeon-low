@@ -1,0 +1,2 @@
+sudo echo profile > /sys/class/drm/card0/device/power_method
+sudo echo low > /sys/class/drm/card0/device/power_profile

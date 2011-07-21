@@ -1,0 +1,1 @@
+../../remote-plugin/html5.vim/syntax/html/rdfa.vim

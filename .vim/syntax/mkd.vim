@@ -1,0 +1,1 @@
+../remote-plugin/vim-markdown/syntax/mkd.vim

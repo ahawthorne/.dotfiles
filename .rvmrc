@@ -1,0 +1,18 @@
+export rvm_path="/home/ahawthorne/.rvm"
+export rvm_pretty_print_flag=1
+
+function setup_rvmrc() {
+  _REPO="git://gist.github.com/1080580.git"
+  _GIT=$(which git)
+  _SED=$(which sed)
+  _MKTEMP=$(which mktemp)
+
+  if [ -d "$2" -a -w "$2" ];
+  then
+    _TMP=$($_MKTEMP -d /tmp/set_rvmrc.XXXXXX)
+    $_GIT clone $_REPO $_TMP
+    $_SED -i "s/^rvm [^@]*@.*/rvm $1/" $_TMP/.rvmrc
+    cp -vf $_TMP/.rvmrc ${2}
+    rm -rf $_TMP
+  fi
+}

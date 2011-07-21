@@ -1,0 +1,1 @@
+../remote-plugin/SunburstVIM/syntax/c.vim

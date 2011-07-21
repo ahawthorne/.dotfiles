@@ -1,0 +1,1 @@
+../remote-plugin/vim-rails/autoload/rails.vim

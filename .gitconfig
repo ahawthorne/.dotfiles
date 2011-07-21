@@ -1,0 +1,28 @@
+[color]
+  branch = auto
+  diff = auto
+  status = auto
+
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+[user]
+  name = Andrew Hawthorne
+  email = andrew@domain7.com
+[gui]
+	recentrepo = /var/www/dev/eyd
+	historybrowser = gitg
+[merge]
+	tool = meld

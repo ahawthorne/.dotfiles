@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+BNAME="/usr/bin/env basename"
+PWD="/usr/bin/env pwd"
+
+SRC=$(${BNAME} $(${PWD}))
+
+for i in $(ls -a);
+ do
+  if [ "." != "$i" -a ".." != "$i" -a "link-home" != "$i" ];
+    then
+    ln -fvs -t ~/ ${SRC}/${i}
+  fi
+done

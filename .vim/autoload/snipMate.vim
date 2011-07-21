@@ -1,0 +1,1 @@
+../remote-plugin/snipmate.vim/autoload/snipMate.vim

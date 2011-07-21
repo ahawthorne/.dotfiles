@@ -1,0 +1,52 @@
+#!/usr/bin/env ruby
+
+@sed = "/usr/bin/env sed"
+check_files = `git diff --check`
+return_code = $?.to_s
+
+def red str
+  "\033[31m#{str}\033[0m"
+end
+
+def green str
+  "\033[32m#{str}\033[0m"
+end
+
+def yellow str
+  "\033[33m#{str}\033[0m"
+end
+
+def remove_whitespace file_list
+  ws_matches = file_list.scan(/^([a-z0-9][^:]+).*trailing whitespace/i)
+  ws_matches = ws_matches.flatten.uniq
+  if 0 < ws_matches.count
+    puts red "Found #{ws_matches.count} files with trailing whitespace!"
+    puts yellow "Removing whitespace from files..."
+    ws_matches.each do |m|
+      puts green m
+      cmd = "#{@sed} -i 's/[ \\t]*$//' #{m}"
+      `#{cmd}`
+    end
+  end
+end
+
+def remove_eof_space file_list
+  eof_matches = file_list.scan(/^([\.a-z0-9][^:]+).*new blank line/i)
+  eof_matches = eof_matches.flatten.uniq
+  if 0 < eof_matches.count
+    puts red "Found #{eof_matches.count} files with blank lines at EOF!"
+    puts yellow "Removing blank lines from EOF..."
+    eof_matches.each do |m|
+      puts green m
+      cmd = "#{@sed} -i -e :a -e '/^\\n*$/{$d;N;ba' -e '}' #{m}"
+      `#{cmd}`
+    end
+  end
+end
+
+if /exit 0/.match(return_code)
+  puts green 'No whitespace or blank lines to kill!'
+else
+  remove_whitespace(check_files)
+  remove_eof_space(check_files)
+end
