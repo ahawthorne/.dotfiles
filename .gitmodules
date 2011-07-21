@@ -1,0 +1,15 @@
+[submodule ".vim/remote-plugin/html5.vim"]
+	path = .vim/remote-plugin/html5.vim
+	url = git://github.com/othree/html5.vim.git
+[submodule ".vim/remote-plugin/snipmate.vim"]
+	path = .vim/remote-plugin/snipmate.vim
+	url = git://github.com/msanders/snipmate.vim.git
+[submodule ".vim/remote-plugin/SunburstVIM"]
+	path = .vim/remote-plugin/SunburstVIM
+	url = https://github.com/tangphillip/SunburstVIM.git
+[submodule ".vim/remote-plugin/vim-markdown"]
+	path = .vim/remote-plugin/vim-markdown
+	url = https://github.com/plasticboy/vim-markdown.git
+[submodule ".vim/remote-plugin/vim-rails"]
+	path = .vim/remote-plugin/vim-rails
+	url = git://github.com/tpope/vim-rails.git
