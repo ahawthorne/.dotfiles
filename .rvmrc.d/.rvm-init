@@ -1,0 +1,24 @@
+# rvm_init /path/to/deploy gemset
+
+function rvm-init() {
+  function _rvm_init_usage() {
+    echo "USAGE: rvm_init /path/to/deploy/ [gemset]"
+  }
+  if [ -z $1  ]; then
+    _rvm_init_usage
+    return 1
+  fi
+
+  _REPO="git://gist.github.com/1080580.git"
+  _GIT=$(which git)
+  _SED=$(which sed)
+  _MKTEMP=$(which mktemp)
+
+  if [ -d "$1" -a -w "$1" ]; then
+    _TMP=$($_MKTEMP -d /tmp/set_rvmrc.XXXXXX)
+    $_GIT clone $_REPO $_TMP
+    $_SED -i "s/^rvm [^@]*@.*/rvm $2/" $_TMP/.rvmrc
+    cp -vf $_TMP/.rvmrc ${1}
+    rm -rf $_TMP
+  fi
+}

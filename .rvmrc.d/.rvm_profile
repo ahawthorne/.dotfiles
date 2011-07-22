@@ -1,0 +1,69 @@
+# set vars for convienence
+_APPDIR=$(dirname $rvm_current_rvmrc 2> /dev/null)
+_VIM=$(which vim)
+_GVIM=$(which gvim)
+_SED=$(which sed)
+_GREP=$(which grep)
+
+# usage: v some/path/returned/from/cucumber:25
+function v() {
+  param=`echo "$@" | $_SED 's/:\([0-9]*\)$/ +\1/'`
+  $_VIM $param
+}
+
+# usage: gv some/path/returned/from/cucumber:25
+function gv() {
+  param=`echo "$@" | $_SED 's/:\([0-9]*\)$/ +\1/'`
+  $_GVIM --remote-tab-silent $param
+}
+
+# provide a path or PT id
+function cucumber() {
+  cd $_APPDIR
+  if [ -f "$@" ];
+  then
+    bundle exec cucumber --require features -f pretty "$@"
+  else
+    line=$(echo "$@" | $_SED -e '/.*:\([0-9]\+\)/!d;s//\1/')
+    param=$(echo "$@" | $_SED 's/:.*//')
+    if [ $(echo $param | grep -oE ^[0-9]\+$) ];
+    then
+      param=$(locate_pt "$param")
+    fi
+    if [ -z $line ];
+    then
+      bundle exec cucumber --require features -f pretty "$param"
+    else
+      bundle exec cucumber --require features -f pretty "$param:$line"
+    fi
+  fi
+  cd -
+}
+
+# return the absolute path for a pivotal tracker id
+function locate_pt() {
+  echo $($_GREP -ril "$@" ${_APPDIR}/features/*)
+}
+
+# usage: gvpt pivotal_tracker_id
+# example: gvpt 123456
+function gvpt(){
+  param=$(locate_pt "$@")
+  $_GVIM --remote-tab-silent "$param"
+}
+
+# usage: vimpt pivotal_tracker_id
+# example: vimpt 123456
+function vimpt(){
+  param=$(locate_pt "$@")
+  $_VIM "$param"
+}
+
+# change dir back to appdir
+function cdapp(){
+  if [ ! -z "$_APPDIR" ]; then
+    cd $_APPDIR
+  else
+    cd .
+  fi
+}
