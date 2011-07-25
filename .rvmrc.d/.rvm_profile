@@ -48,17 +48,17 @@ function vimify() {
     fi
   done
 
-  // get the path from the pivitol id
+  # get the path from the pivitol id
   if [ ! -z $v_ptid ]; then
     v_path=$(locate_pt $v_ptid)
   fi
 
-  // either open vim/gvim or show the params
+  # either open vim/gvim or show the params
   if [ ! -z $v_path ]; then
     if [ ! -z $v_whichvim ]; then
       $v_whichvim ${v_param} ${v_line} ${v_path}
     else
-      echo ${v_param} ${v_line} ${v_path}
+      echo "${v_param} ${v_line} ${v_path}"
     fi
   else
     echo "Path or Pivotal Tracker id not found."
