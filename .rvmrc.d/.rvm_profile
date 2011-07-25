@@ -66,13 +66,14 @@ function vimify() {
 
 }
 
-
-# usage: v some/path/returned/from/cucumber:25
+# usage: see vimify
+# alias for vimify vim 
 function v() {
   vimify vim $@
 }
 
-# usage: g some/path/returned/from/cucumber:25
+# usage: see vimify
+# alias for vimify gvim 
 function g() {
   vimify gvim $@
 }
