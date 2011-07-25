@@ -1,1 +1,2 @@
-alias gvim='gvim --remote-tab-silent'
+alias gvim='g'
+alias vim='v'

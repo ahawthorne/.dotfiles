@@ -5,16 +5,76 @@ _GVIM=$(which gvim)
 _SED=$(which sed)
 _GREP=$(which grep)
 
-# usage: v some/path/returned/from/cucumber:25
-function v() {
-  param=`echo "$@" | $_SED 's/:\([0-9]*\)$/ +\1/'`
-  $_VIM $param
+# vimify [vim|gvim] 123445:12
+# vimify [vim|gvim] 123445
+# vimify [vim|gvim] path/to/file:12
+# vimify [vim|gvim] path/to/file +12
+# vimify [vim|gvim] path/to/file
+function vimify() {
+  # determine format of parameter(s)
+  # for gvim the path should be the last parameter
+  v_line=''
+  v_ptid=''
+  v_path=''
+  v_param=''
+  v_whichvim=''
+  if (test 'gvim' == $1); then
+    v_param='--remote-tab-silent'
+    v_whichvim=$_GVIM
+    unset $1
+  elif (test 'vim' == $1); then
+    v_whichvim=$_VIM
+    unset $1
+  fi
+
+  for var in "$@"; do
+    if (echo $var | $_GREP -qE "^\+[0-9]+$"); then
+      v_line=$var
+      continue
+    elif (echo $var | $_GREP -qE ^[0-9]+$); then
+      v_ptid=$var
+      continue
+    elif (echo $var | $_GREP -qE ^[0-9]+:[0-9]+$); then
+      v_line="+"$(echo $var | $_SED -e '/.*:\([0-9]\+\)/!d;s//\1/')
+      v_ptid=$(echo $var | $_SED -e '/\([0-9]\+\):.*/!d;s//\1/')
+      continue
+    elif (echo $var | $_GREP -qiE ^/?([a-z0-9_.-]+/)*[a-z0-9_.-]+$); then
+      v_path=$var
+      continue
+    elif (echo $var | $_GREP -qiE ^/?([a-z0-9_.-]+/)*[a-z0-9_.-]+:[0-9]+$); then
+      v_line="+"$(echo $var | $_SED -e '/.*:\([0-9]\+\)/!d;s//\1/')
+      v_path=$(echo $var | $_SED -e '/\(.*\):.*/!d;s//\1/')
+      continue
+    fi
+  done
+
+  // get the path from the pivitol id
+  if [ ! -z $v_ptid ]; then
+    v_path=$(locate_pt $v_ptid)
+  fi
+
+  // either open vim/gvim or show the params
+  if [ ! -z $v_path ]; then
+    if [ ! -z $v_whichvim ]; then
+      $v_whichvim ${v_param} ${v_line} ${v_path}
+    else
+      echo ${v_param} ${v_line} ${v_path}
+    fi
+  else
+    echo "Path or Pivotal Tracker id not found."
+  fi
+
 }
 
-# usage: gv some/path/returned/from/cucumber:25
-function gv() {
-  param=`echo "$@" | $_SED 's/:\([0-9]*\)$/ +\1/'`
-  $_GVIM --remote-tab-silent $param
+
+# usage: v some/path/returned/from/cucumber:25
+function v() {
+  vimify vim $@
+}
+
+# usage: g some/path/returned/from/cucumber:25
+function g() {
+  vimify gvim $@
 }
 
 # provide a path or PT id
@@ -43,20 +103,6 @@ function cucumber() {
 # return the absolute path for a pivotal tracker id
 function locate_pt() {
   echo $($_GREP -ril "$@" ${_APPDIR}/features/*)
-}
-
-# usage: gvpt pivotal_tracker_id
-# example: gvpt 123456
-function gvpt(){
-  param=$(locate_pt "$@")
-  $_GVIM --remote-tab-silent "$param"
-}
-
-# usage: vimpt pivotal_tracker_id
-# example: vimpt 123456
-function vimpt(){
-  param=$(locate_pt "$@")
-  $_VIM "$param"
 }
 
 # change dir back to appdir
