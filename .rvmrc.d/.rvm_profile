@@ -31,17 +31,17 @@ function vimify() {
     if (echo $var | $_GREP -qE "^\+[0-9]+$"); then
       v_line=$var
       continue
-    elif (echo $var | $_GREP -qE ^[0-9]+$); then
+    elif (echo $var | $_GREP -qE "^[0-9]+$"); then
       v_ptid=$var
       continue
-    elif (echo $var | $_GREP -qE ^[0-9]+:[0-9]+$); then
+    elif (echo $var | $_GREP -qE "^[0-9]+:[0-9]+$"); then
       v_line="+"$(echo $var | $_SED -e '/.*:\([0-9]\+\)/!d;s//\1/')
       v_ptid=$(echo $var | $_SED -e '/\([0-9]\+\):.*/!d;s//\1/')
       continue
-    elif (echo $var | $_GREP -qiE ^/?([a-z0-9_.-]+/)*[a-z0-9_.-]+$); then
+    elif (echo $var | $_GREP -qiE "^/?([a-z0-9_.-]+/)*[a-z0-9_.-]+$"); then
       v_path=$var
       continue
-    elif (echo $var | $_GREP -qiE ^/?([a-z0-9_.-]+/)*[a-z0-9_.-]+:[0-9]+$); then
+    elif (echo $var | $_GREP -qiE "^/?([a-z0-9_.-]+/)*[a-z0-9_.-]+:[0-9]+$"); then
       v_line="+"$(echo $var | $_SED -e '/.*:\([0-9]\+\)/!d;s//\1/')
       v_path=$(echo $var | $_SED -e '/\(.*\):.*/!d;s//\1/')
       continue
@@ -56,7 +56,7 @@ function vimify() {
   # either open vim/gvim or show the params
   if [ ! -z $v_path ]; then
     if [ ! -z $v_whichvim ]; then
-      $v_whichvim ${v_param} ${v_line} ${v_path}
+      $v_whichvim ${v_param} ${v_line} ${v_path} 2> /dev/null
     else
       echo "${v_param} ${v_line} ${v_path}"
     fi
@@ -87,7 +87,7 @@ function cucumber() {
   else
     line=$(echo "$@" | $_SED -e '/.*:\([0-9]\+\)/!d;s//\1/')
     param=$(echo "$@" | $_SED 's/:.*//')
-    if [ $(echo $param | grep -oE ^[0-9]\+$) ];
+    if [ $(echo $param | $_GREP -oE "^[0-9]\+$") ];
     then
       param=$(locate_pt "$param")
     fi
@@ -104,6 +104,11 @@ function cucumber() {
 # return the absolute path for a pivotal tracker id
 function locate_pt() {
   echo $($_GREP -ril "$@" ${_APPDIR}/features/*)
+}
+
+function get_pt() {
+#cat features/sprint_5_patient_request/patient_request/patient_creates_an_email_request.feature | sed -e '/^.*pivotaltracker.com\/story\/show\/\([0-9]\+\)/!d;s//\1/'
+  cat "$@" | sed -e '/^.*pivotaltracker.com\/story\/show\/\([0-9]\+\)/!d;s//\1/'
 }
 
 # change dir back to appdir
