@@ -28,20 +28,20 @@ function vimify() {
   fi
 
   for var in "$@"; do
-    if (echo $var | $_GREP -qE "^\+[0-9]+$"); then
+    if (echo $var | $_GREP -qE '^\+[0-9]+$'); then
       v_line=$var
       continue
-    elif (echo $var | $_GREP -qE "^[0-9]+$"); then
+    elif (echo $var | $_GREP -qE '^[0-9]+$'); then
       v_ptid=$var
       continue
-    elif (echo $var | $_GREP -qE "^[0-9]+:[0-9]+$"); then
+    elif (echo $var | $_GREP -qE '^[0-9]+:[0-9]+$'); then
       v_line="+"$(echo $var | $_SED -e '/.*:\([0-9]\+\)/!d;s//\1/')
       v_ptid=$(echo $var | $_SED -e '/\([0-9]\+\):.*/!d;s//\1/')
       continue
-    elif (echo $var | $_GREP -qiE "^/?([a-z0-9_.-]+/)*[a-z0-9_.-]+$"); then
+    elif (echo $var | $_GREP -qiE '^/?([a-z0-9_.-]+/)*[a-z0-9_.-]+$'); then
       v_path=$var
       continue
-    elif (echo $var | $_GREP -qiE "^/?([a-z0-9_.-]+/)*[a-z0-9_.-]+:[0-9]+$"); then
+    elif (echo $var | $_GREP -qiE '^/?([a-z0-9_.-]+/)*[a-z0-9_.-]+:[0-9]+$'); then
       v_line="+"$(echo $var | $_SED -e '/.*:\([0-9]\+\)/!d;s//\1/')
       v_path=$(echo $var | $_SED -e '/\(.*\):.*/!d;s//\1/')
       continue
@@ -87,7 +87,7 @@ function cucumber() {
   else
     line=$(echo "$@" | $_SED -e '/.*:\([0-9]\+\)/!d;s//\1/')
     param=$(echo "$@" | $_SED 's/:.*//')
-    if [ $(echo $param | $_GREP -oE "^[0-9]\+$") ];
+    if [ $(echo $param | $_GREP -oE '^[0-9]+$') ];
     then
       param=$(locate_pt "$param")
     fi
