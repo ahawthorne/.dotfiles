@@ -1,3 +1,6 @@
+function _rails() {
+  /usr/bin/env rails $@
+}
 alias rails="bundle exec rails"
 alias specjour="bundle exec specjour"
 alias rspec="bundle exec rspec"

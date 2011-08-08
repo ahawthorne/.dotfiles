@@ -1,8 +1,17 @@
 #!/usr/bin/env ruby
 
 @sed = "/usr/bin/env sed"
-check_files = `git diff --check`
+check_files = `git diff --check --cached HEAD`
 return_code = $?.to_s
+@param = ARGV
+@add_after_cleanup = false
+@file_list = []
+
+@param.each do |p|
+  if p == '-a'
+    @add_after_cleanup = true
+  end
+end
 
 def red str
   "\033[31m#{str}\033[0m"
@@ -23,10 +32,12 @@ def remove_whitespace file_list
     puts red "Found #{ws_matches.count} files with trailing whitespace!"
     puts yellow "Removing whitespace from files..."
     ws_matches.each do |m|
+      @file_list << m
       puts green m
       cmd = "#{@sed} -i 's/[ \\t]*$//' #{m}"
       `#{cmd}`
     end
+    puts "\n"
   end
 end
 
@@ -37,11 +48,21 @@ def remove_eof_space file_list
     puts red "Found #{eof_matches.count} files with blank lines at EOF!"
     puts yellow "Removing blank lines from EOF..."
     eof_matches.each do |m|
+      @file_list << m
       puts green m
       cmd = "#{@sed} -i -e :a -e '/^\\n*$/{$d;N;ba' -e '}' #{m}"
       `#{cmd}`
     end
+    puts "\n"
   end
+end
+
+def add_modified_files
+  puts yellow "Adding modifed files to index..."
+  list = @file_list.uniq.join(' ')
+  cmd = "git add -v #{list}"
+  output = `#{cmd} 2>&1`
+  puts green output
 end
 
 if /exit 0/.match(return_code)
@@ -49,4 +70,8 @@ if /exit 0/.match(return_code)
 else
   remove_whitespace(check_files)
   remove_eof_space(check_files)
+
+  if @add_after_cleanup
+    add_modified_files
+  end
 end
