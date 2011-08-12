@@ -26,3 +26,5 @@
 	historybrowser = gitg
 [merge]
 	tool = meld
+[diff]
+	tool = meld

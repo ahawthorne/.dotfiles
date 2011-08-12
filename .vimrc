@@ -17,8 +17,9 @@ set expandtab
 
 " use unix style line ednings
 set ff=unix
+set foldmethod=marker
 
-colorscheme sunburst 
+colorscheme default 
 set gfn=Droid\ Sans\ Mono\ 11
 set dir=/tmp
 set bdir=/tmp
@@ -64,4 +65,3 @@ function MyDiff()
   endif
   silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
 endfunction
-
