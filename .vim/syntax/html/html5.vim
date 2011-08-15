@@ -1,1 +1,0 @@
-../../remote-plugin/html5.vim/syntax/html/html5.vim

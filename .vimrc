@@ -1,3 +1,4 @@
+call pathogen#infect()
 set nowrap
 
 filetype plugin on
@@ -19,7 +20,7 @@ set expandtab
 set ff=unix
 set foldmethod=marker
 
-colorscheme default 
+colorscheme default
 set gfn=Droid\ Sans\ Mono\ 11
 set dir=/tmp
 set bdir=/tmp

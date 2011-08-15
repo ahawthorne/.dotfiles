@@ -1,1 +1,0 @@
-../remote-plugin/SunburstVIM/syntax/javascript.vim

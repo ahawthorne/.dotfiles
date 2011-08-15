@@ -1,1 +1,0 @@
-../remote-plugin/SunburstVIM/colors/sunburst.vim

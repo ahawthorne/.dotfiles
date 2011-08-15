@@ -1,1 +1,0 @@
-../../remote-plugin/snipmate.vim/after/plugin/snipMate.vim
