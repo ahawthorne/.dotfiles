@@ -1,3 +1,4 @@
+set t_Co=16
 call pathogen#infect()
 set nowrap
 
@@ -20,7 +21,10 @@ set expandtab
 set ff=unix
 set foldmethod=marker
 
-colorscheme default
+
+let g:solarized_termcolors=256
+colorscheme solarized
+se background=dark
 set gfn=Droid\ Sans\ Mono\ 11
 set dir=/tmp
 set bdir=/tmp
@@ -74,8 +78,7 @@ function! Preserve(command)
   let c = col(".")
   "Do the business:
   execute a:command
-  "Clean up: restore previous search history, and cursor
-  position
+  "Clean up: restore previous search history, and cursor position
   let @/=_s
   call cursor(l, c)
 endfunction
