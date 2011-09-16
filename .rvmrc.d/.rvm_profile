@@ -121,5 +121,6 @@ function cdapp(){
 }
 
 function ctags_gen() {
-  ctags -R --exclude=.git --exclude=log * ~/.rvm/gems/$(rvm current)/*
+#  ctags -R --exclude=.git --exclude=log * ~/.rvm/gems/$(rvm current)/*
+  ctags -R --exclude=.git --exclude=log *
 }

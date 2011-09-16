@@ -1,6 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_cnt =5
 let g:netrw_dirhist_1='/var/www/dev'
 let g:netrw_dirhist_2='/home/ahawthorne/.rvm'
 let g:netrw_dirhist_3='/var/www/dev/eyd'
 let g:netrw_dirhist_4='/home/ahawthorne/.dotfiles/.vim/bundle/vim-fugitive'
+let g:netrw_dirhist_5='/var/www/dev/eyd/config/deploy'

@@ -105,3 +105,5 @@ fi
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function
 
 export PATH=$PATH:/usr/share/php
+export NODE_PATH=/usr/local/lib/node_modules
+export OPSCODE_USER=ahawthorne
