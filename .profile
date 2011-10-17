@@ -22,3 +22,7 @@ if [ -d "$HOME/bin" ] ; then
 fi
 . $(which byobu-launch)
 export NODE_PATH=/usr/local/lib/jsctags/:$NODE_PATH
+export LANGUAGE="en_CA:en"
+export LC_MESSAGES="en_CA.UTF-8"
+export LC_CTYPE="en_CA.UTF-8"
+export LC_COLLATE="en_CA.UTF-8"
