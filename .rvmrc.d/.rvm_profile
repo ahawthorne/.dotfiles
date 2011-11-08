@@ -101,6 +101,18 @@ function cucumber() {
   cd -
 }
 
+# bundler install to vendor
+function bundles() {
+  cd $_APPDIR
+  _BUNDL=$(which bundle)
+  if $(test ${1} == 'install'); then
+    $($_BUNDL $@ --path vendor)
+  else
+    $($_BUNDL $@ )
+  fi
+  cd -
+}
+
 # return the absolute path for a pivotal tracker id
 function locate_pt() {
   echo $($_GREP -ril "$@" ${_APPDIR}/features/*)

@@ -23,7 +23,7 @@ set foldmethod=marker
 
 
 let g:solarized_termcolors=256
-colorscheme solarized
+colorscheme ir_black
 se background=dark
 set gfn=Droid\ Sans\ Mono\ 11
 set dir=/tmp
