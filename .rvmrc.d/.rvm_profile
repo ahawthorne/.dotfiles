@@ -1,9 +1,9 @@
 # set vars for convienence
 _APPDIR=$(dirname $rvm_current_rvmrc 2> /dev/null)
-_VIM=$(which vim)
-_GVIM=$(which gvim)
-_SED=$(which sed)
-_GREP=$(which grep)
+_VIM=$(which --skip-alias vim)
+_GVIM=$(which --skip-alias gvim)
+_SED=$(which --skip-alias sed)
+_GREP=$(which --skip-alias grep)
 
 # vimify [vim|gvim] 123445:12
 # vimify [vim|gvim] 123445
@@ -104,7 +104,7 @@ function cucumber() {
 # bundler install to vendor
 function bundles() {
   cd $_APPDIR
-  _BUNDL=$(which bundle)
+  _BUNDL=$(which --skip-alias bundle)
   if $(test ${1} == 'install'); then
     $($_BUNDL $@ --path vendor)
   else

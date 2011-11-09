@@ -22,7 +22,7 @@ set ff=unix
 set foldmethod=marker
 
 
-let g:solarized_termcolors=256
+" let g:solarized_termcolors=256
 colorscheme ir_black
 se background=dark
 set gfn=Droid\ Sans\ Mono\ 11
