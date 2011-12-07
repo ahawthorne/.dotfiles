@@ -1,2 +1,0 @@
-echo profile > /sys/class/drm/card0/device/power_method
-echo default > /sys/class/drm/card0/device/power_profile
