@@ -21,14 +21,21 @@
 [user]
   name = Andrew Hawthorne
   email = andrew@domain7.com
-	signingkey = 4B372969
+  signingkey = 4B372969
 [gui]
-	recentrepo = /var/www/dev/eyd
-	historybrowser = gitg
+  recentrepo = /var/www/dev/eyd
+  historybrowser = gitg
 [merge]
-	tool = meld
+  tool = meld
 [diff]
-	tool = meld
+  tool = meld
 [core]
-	editor = vim
+  editor = vim
 	autocrlf = input
+[instaweb]
+  local = false
+  httpd = httpd -f
+  port = 1234
+  browser = google-chrome
+  modulepath = /etc/httpd/modules
+
