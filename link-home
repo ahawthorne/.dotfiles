@@ -9,6 +9,8 @@ for i in $(ls -a);
  do
   if [ "." != "$i" -a ".." != "$i" -a "link-home" != "$i" -a ".git" != "$i" ];
     then
-    ln -fvs -t ~/ ${SRC}/${i}
+      #if ! test -L ~/${i}; then
+        ln -fvs -t ~/ ${SRC}/${i}
+      #fi
   fi
 done
