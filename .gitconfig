@@ -31,7 +31,6 @@
   tool = meld
 [core]
   editor = vim
-	autocrlf = input
 [instaweb]
   local = false
   httpd = httpd -f
