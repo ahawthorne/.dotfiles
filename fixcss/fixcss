@@ -28,7 +28,7 @@ if [ -z ${1} ]; then
   exit 1
 fi
 
-TMPFILE=$(mktemp)
+TMPFILE=$(mktemp -t tmp.XXXX)
 
 ${CSSTIDY} ${INFILE} \
   --silent \
@@ -39,8 +39,8 @@ ${CSSTIDY} ${INFILE} \
   --template=${FIXCSS_PATH}/readable.tpl \
   ${TMPFILE} > /dev/null 2>&1
 
-while $(grep -qE ^\([^,]\+\),\(.\) ${TMPFILE}); do
-  sed -ie 's/^\([^,]\+\),\(.\)/\1,\n\2/g' ${TMPFILE}
+while $(grep -qiE ^\([a-z0-9#\.][^,]\+\),\(.\) ${TMPFILE}); do
+  sed -ie 's/^\([a-z0-9#\.][^,]\+\),\(.\)/\1,\n\2/ig' ${TMPFILE}
 done
 
 if [ -z ${2} ]; then
