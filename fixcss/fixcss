@@ -1,0 +1,52 @@
+#!/bin/bash
+
+FIXCSS_PATH=$(dirname $(readlink -f $0))
+INFILE="$1"
+OUTFILE="$2"
+
+function usage() {
+cat <<-EOD
+--------------------------------------------------------------------------------
+FixCSS
+It makes your css less grossified.
+
+Usage:
+fixcss INPUT_FILE OUTPUT_FILE
+--------------------------------------------------------------------------------
+EOD
+}
+
+if ! $(which csstidy > /dev/null 2>&1); then
+  echo "CSSTidy not found. Please install it and try again."
+  exit 1
+else
+  CSSTIDY=`which csstidy`
+fi
+
+if [ -z ${1} ]; then
+  usage
+  exit 1
+fi
+
+TMPFILE=$(mktemp)
+
+${CSSTIDY} ${INFILE} \
+  --silent \
+  --compress_colors=true \
+  --preserve_css=true \
+  --lowercase_s=true \
+  --discard_invalid_properties=false \
+  --template=${FIXCSS_PATH}/readable.tpl \
+  ${TMPFILE} > /dev/null 2>&1
+
+while $(grep -qE ^\([^,]\+\),\(.\) ${TMPFILE}); do
+  sed -ie 's/^\([^,]\+\),\(.\)/\1,\n\2/g' ${TMPFILE}
+done
+
+if [ -z ${2} ]; then
+  cat ${TMPFILE}
+else
+  cat ${TMPFILE} > ${OUTFILE}
+fi
+
+rm ${TMPFILE}

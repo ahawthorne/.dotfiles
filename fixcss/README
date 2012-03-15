@@ -1,0 +1,7 @@
+Install csstidy
+symlink fixcss to one of the bin directories in your path (ie /home/{user}/bin)
+
+Usage:
+fixcss INPUT_FILE OUTPUT_FILE
+
+if OUTPUT_FILE is not provided, output will be stdout
