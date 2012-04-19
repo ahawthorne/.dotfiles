@@ -1,0 +1,34 @@
+#!/bin/bash
+
+#pre-script utils
+sudo yum -y install xdg-utils yum-plugin-fastestmirror yum-presto yum-langpacks
+
+PKG_LIST="gnome-tweak-tool dconf-editor gnome-extension-common gnome-shell-extension-user-theme gnome-shell-extension-theme-selector"
+#internet apps and media
+PKG_LIST="${PKG_LIST} google-chrome-unstable flash-plugin gstreamer gstreamer-plugins-good gstreamer-plugins-bad gstreamer-plugins-ugly ffmpeg ffmpeg-libs libdvdread libdvdnav lsdvd vlc"
+#fonts
+PKG_LIST="${PKG_LIST} freetype-freeworld"
+
+#copy repos
+sudo cp -r include/google.repo /etc/yum.repos.d/
+
+# install rpmfusion free and non-free
+su -c 'yum localinstall --nogpgcheck http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-stable.noarch.rpm'
+
+# adobe repo
+sudo rpm -Uvh http://linuxdownload.adobe.com/adobe-release/adobe-release-i386-1.0-1.noarch.rpm
+sudo rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-adobe-linux
+
+# google talk
+#http://www.google.com/chat/video/download.html
+
+# update yum
+sudo yum -y update
+
+# install packages
+sudo yum -y install ${PKG_LIST}
+
+# fonts
+gsettings "set" "org.gnome.settings-daemon.plugins.xsettings" "hinting" "slight"
+gsettings "set" "org.gnome.settings-daemon.plugins.xsettings" "antialiasing" "rgba"
+echo "Xft.lcdfilter: lcddefault" > ~/.Xresources

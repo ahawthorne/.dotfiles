@@ -37,7 +37,31 @@ au BufNewFile,BufRead *.htm7 set filetype=html
 au! BufRead,BufNewFile *.vm  setfiletype velocity
 
 " clean formatting for css
-map <F9> :%s/\n\+\s*//g<CR>:%s/:[ ]*/:/g<CR>:%s/}/}\r\r/g<CR>:%s/;/;\r\t/g<CR>:%s/[ ]*{/ {\r\t/g<CR>:%s/\(\t\)\?\/\*\(.*\)\*\//\1\/\*\r\1\2\r\1\*\/\r\1/ge<CR>:%s/\(\t\)\?\/\*/\1\/\*\r\1/ge<CR>:%s/\(\n\+\)\?\(\t\)\?\*\//\r\2\*\/\r\2\1\2/ge<CR>:%s/^\t}/}/g<CR>:%s/\t\([^:]\+\):/\t\1: /g<CR>:%s/[ ]*!important/ !important/ge<CR>:%s/\t\n//ge<CR>:%s/\n\{3,\}/\r\r/ge<CR>:%s/\(\n^$\)\{2,\}//ge<CR>:let err=0<CR>:while err == 0<CR>try<CR> %s/^\([^,\t]\+\),\([^$ ]\)/\1,\r\2/g<CR>catch /^Vim\%((\a\+)\)\=:E/<CR>endtry<CR>:endwhile<CR>
+":%s/\n\+\s*//g
+":%s/:[ ]*/:/g
+":%s/}/}\r\r/g
+":%s/;/;\r\t/g
+":%s/[ ]*{/ {\r\t/g
+":%s/\(\t\)\?\/\*\(.*\)\*\//\1\/\*\r\1\2\r\1\*\/\r\1/ge
+":%s/\(\t\)\?\/\*/\1\/\*\r\1/ge
+"
+":%s/\(\n\+\)\?\(\t\)\?\*\//\r\2\*\/\r\2\1\2/ge
+":%s/^\t}/}/g
+":%s/\t\([^:]\+\):/\t\1: /g
+":%s/[ ]*!important/ !important/ge
+":%s/\t\n//ge
+":%s/\n\{3,\}/\r\r/ge
+":%s/\(\n^$\)\{2,\}//ge
+":let err=0
+":while err == 0
+"try
+"%s/^\([^,\t]\+\),\([^$]\)/\1,\r\2/g
+"catch /^Vim\%((\a\+)\)\=:E/
+"endtry
+":endwhile
+"gg=G
+
+map <F9> :%s/\n\+\s*//g<CR>:%s/:[ ]*/:/g<CR>:%s/}/}\r\r/g<CR>:%s/;/;\r\t/g<CR>:%s/[ ]*{/ {\r\t/g<CR>:%s/\(\t\)\?\/\*\(.*\)\*\//\1\/\*\r\1\2\r\1\*\/\r\1/ge<CR>:%s/\(\t\)\?\/\*/\1\/\*\r\1/ge<CR>:%s/\(\n\+\)\?\(\t\)\?\*\//\r\2\*\/\r\2\1\2/ge<CR>:%s/^\t}/}/g<CR>:%s/\t\([^:]\+\):/\t\1: /g<CR>:%s/[ ]*!important/ !important/ge<CR>:%s/\t\n//ge<CR>:%s/\n\{3,\}/\r\r/ge<CR>:%s/\(\n^$\)\{2,\}//ge<CR>:let err=0<CR>:while err == 0<CR>try<CR> %s/^\([^,\t]\+\),\([^$]\)/\1,\r\2/g<CR>catch /^Vim\%((\a\+)\)\=:E/<CR>endtry<CR>:endwhile<CR>gg=G<CR>
 
 " sort css attributes
 map <A-F12> :%s/[ ]\+$//ge<CR>:let _srch=search('{','W')<CR>viB:sort<CR>:if _srch == 0<CR>:echoerr "Sort reached bottom"<CR><ESC>:endif<CR><C-C><A-F12>
