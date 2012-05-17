@@ -1,3 +1,6 @@
+host *
+  ServerAliveInterval 120
+
 host *.domain7.com *.domain7.net *.jibc.ca
   ControlMaster auto
   ControlPath ~/tmp/%r@%h:%p
