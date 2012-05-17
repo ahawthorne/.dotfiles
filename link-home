@@ -7,10 +7,18 @@ SRC=$(${BNAME} $(${PWD}))
 
 for i in $(ls -a);
  do
-  if [ "." != "$i" -a ".." != "$i" -a "link-home" != "$i" -a ".git" != "$i" ];
+  if [ "." != "$i" -a ".." != "$i" -a "link-home" != "$i" -a ".git" != "$i" -a "config" != "$i" ];
     then
       #if ! test -L ~/${i}; then
         ln -fvs -t ~/ ${SRC}/${i}
       #fi
   fi
 done
+
+# ssh config
+ln -fvs ../${SRC}/config/ssh-config ../.ssh/config
+chmod 600 ~/${SRC}/config/ssh-config
+if [ ! -e ~/tmp ]; then
+  echo "asdf"
+  mkdir ~/tmp
+fi
