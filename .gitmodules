@@ -40,3 +40,9 @@
 [submodule ".vim/bundle/vim-css3-syntax"]
 	path = .vim/bundle/vim-css3-syntax
 	url = git://github.com/hail2u/vim-css3-syntax.git
+[submodule "include/git-meld"]
+	path = include/git-meld
+	url = git://github.com/wmanley/git-meld.git
+[submodule "include/hcl"]
+	path = include/hcl
+	url = git://github.com/zenhob/hcl.git
