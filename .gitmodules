@@ -46,3 +46,9 @@
 [submodule "include/hcl"]
 	path = include/hcl
 	url = git://github.com/zenhob/hcl.git
+[submodule "include/drush"]
+	path = include/drush
+	url = http://git.drupal.org/project/drush.git
+[submodule "include/deph"]
+	path = include/deph
+	url = git@bitbucket.org:domain7/deph.git

@@ -11,3 +11,4 @@ PATH=$PATH:$HOME/.local/bin:$HOME/bin:$HOME/AndroidSDK:$HOME/AndroidSDK/tools:$H
 
 export PATH
 export EDITOR=vim
+export $(gnome-keyring-daemon -s)
