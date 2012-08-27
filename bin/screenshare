@@ -1,0 +1,2 @@
+#!/bin/bash
+x11vnc -rfbauth ~/.vnc/passwd -avahi -clip 1680x1050+1920+0 -viewonly -ncache 10 -ncache_cr -speeds modem -wireframe -scrollcopyrect always
