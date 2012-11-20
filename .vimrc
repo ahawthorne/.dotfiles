@@ -16,11 +16,16 @@ set expandtab
 " set softtabstop=0
 " set shiftwidth=3
 " set noexpandtab
+set autoindent
+set copyindent
+set smarttab
+
 
 " use unix style line ednings
 set ff=unix
 set foldmethod=marker
 
+set pastetoggle=<F2>
 
 " let g:solarized_termcolors=256
 colorscheme ir_black
@@ -31,6 +36,7 @@ set bdir=/tmp
 set diffexpr=MyDiff()
 :hi Search guibg=Yellow guifg=black
 set hlsearch
+set incsearch
 
 " added extensions
 au BufNewFile,BufRead *.htm7 set filetype=html

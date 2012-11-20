@@ -1,0 +1,1 @@
+/var/www/domain7/drupal-installprofile-d7/installer/d7install.sh

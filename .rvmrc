@@ -2,9 +2,9 @@ export rvm_path="/home/ahawthorne/.rvm"
 export rvm_pretty_print_flag=1
 
 # include custom settings
-if (test -d ~/.rvmrc.d)
-then
-  for i in ~/.rvmrc.d/.rvm*; do
-    source $i
-  done
-fi
+#if (test -d ~/.rvmrc.d)
+#then
+#  for i in ~/.rvmrc.d/.rvm*; do
+#    source $i
+#  done
+#fi
