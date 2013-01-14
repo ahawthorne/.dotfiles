@@ -52,3 +52,6 @@
 [submodule "include/deph"]
 	path = include/deph
 	url = git@bitbucket.org:domain7/deph.git
+[submodule "include/avahi-aliases"]
+	path = include/avahi-aliases
+	url = git@github.com:ahawthorne/avahi-aliases.git
