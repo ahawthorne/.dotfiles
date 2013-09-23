@@ -55,3 +55,15 @@
 [submodule "include/avahi-aliases"]
 	path = include/avahi-aliases
 	url = git@github.com:ahawthorne/avahi-aliases.git
+[submodule ".vim/bundle/neocomplcache"]
+	path = .vim/bundle/neocomplcache
+	url = git://github.com/Shougo/neocomplcache.git
+[submodule ".vim/bundle/git-time-lapse/plugin"]
+	path = .vim/bundle/git-time-lapse/plugin
+	url = http://www.tidraso.co.uk/repository/vim-plugin/
+[submodule ".vim/bundle/nerdtree"]
+	path = .vim/bundle/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git
+[submodule ".tmux"]
+	path = .tmux
+	url = https://github.com/yesmeck/tmuxrc.git

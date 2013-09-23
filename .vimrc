@@ -23,6 +23,7 @@ set smarttab
 
 " use unix style line ednings
 set ff=unix
+set ffs=unix
 set foldmethod=marker
 
 set pastetoggle=<F2>
@@ -33,7 +34,7 @@ se background=dark
 set gfn=Droid\ Sans\ Mono\ 11
 set dir=/tmp
 set bdir=/tmp
-set diffexpr=MyDiff()
+"set diffexpr=MyDiff()
 :hi Search guibg=Yellow guifg=black
 set hlsearch
 set incsearch
@@ -41,6 +42,32 @@ set incsearch
 " added extensions
 au BufNewFile,BufRead *.htm7 set filetype=html
 au! BufRead,BufNewFile *.vm  setfiletype velocity
+
+let g:neocomplcache_enable_at_startup = 0
+"let g:neocomplcache_disable_auto_complete = 1
+let g:neocomplcache_min_syntax_length = 3
+" Plugin key-mappings.
+imap <C-k>     <Plug>(neocomplcache_snippets_expand)
+smap <C-k>     <Plug>(neocomplcache_snippets_expand)
+inoremap <expr><C-g>     neocomplcache#undo_completion()
+inoremap <expr><C-l>     neocomplcache#complete_common_string()
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplcache#close_popup()
+inoremap <expr><C-e>  neocomplcache#cancel_popup()
+" Enable omni completion. Not required if they are already set elsewhere in
+" .vimrc
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " clean formatting for css
 ":%s/\n\+\s*//g
@@ -71,6 +98,8 @@ map <F9> :%s/\n\+\s*//g<CR>:%s/:[ ]*/:/g<CR>:%s/}/}\r\r/g<CR>:%s/;/;\r\t/g<CR>:%
 
 " sort css attributes
 map <A-F12> :%s/[ ]\+$//ge<CR>:let _srch=search('{','W')<CR>viB:sort<CR>:if _srch == 0<CR>:echoerr "Sort reached bottom"<CR><ESC>:endif<CR><C-C><A-F12>
+
+map <leader>gt :call TimeLapse()<CR>
 
 vmap <F11> <Esc>:'<,'><<<<<CR>:'<,'>s/^\(.*\)$/\t$sql .= " \1 ";/<CR>/$sql<CR>
 "vmap <F12> <Esc>:'<,'>s/^.*= "//<CR>:'<,'>s/".*$//<CR>:SQLUFormatStmts<CR>/SELECT\\|INSERT\\|UPDATE\\|DELETE<CR>
