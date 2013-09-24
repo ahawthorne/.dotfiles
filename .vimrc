@@ -1,5 +1,9 @@
+set nocompatible
 set t_Co=16
-call pathogen#infect()
+" call pathogen#infect()
+
+source ~/.vim/.bundle
+
 set nowrap
 
 filetype plugin on
