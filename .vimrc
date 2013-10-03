@@ -2,6 +2,7 @@ set nocompatible
 set t_Co=16
 " call pathogen#infect()
 
+set mouse=a
 source ~/.vim/.bundle
 
 set nowrap
