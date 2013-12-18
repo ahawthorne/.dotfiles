@@ -26,5 +26,5 @@ if [ -d "${RBENV_ROOT}" ]; then
   eval "$(rbenv init -)"
 fi
 
-export BUNGLER="rails rake rspec cucumber knife"
+export BUNGLER="rails rake rspec cucumber knife pickler"
 [[ -s "$HOME/.bungler/bungler" ]] && . $HOME/.bungler/bungler
