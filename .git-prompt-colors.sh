@@ -1,13 +1,14 @@
 local Time12a="\$(date +%H:%M)"
 local PathShort="\u@\h \W"
 
-GREEN="\[\033[38;5;02m\]"
-BRIGHTGREEN="\[\033[38;5;10m\]"
+GREEN="\[\033[38;5;106m\]"
+BRIGHTGREEN="\[\033[38;5;112m\]"
 BLUE="\[\033[38;5;39m\]"
 CYAN="\[\033[38;5;06m\]"
 ORANGE="\[\033[38;5;202m\]"
 RED="\[\033[38;5;09m\]"
 YELLOW="\[\033[38;5;03m\]"
+MAGENTA="\[\033[38;5;163m\]"
 
 # These are the color definitions used by gitprompt.sh
 GIT_PROMPT_PREFIX="("                 # start of the git info string
@@ -23,14 +24,14 @@ GIT_PROMPT_CHANGED="${GREEN}✚"         # the number of changed files
 GIT_PROMPT_REMOTE=" "                 # the remote branch name (if any) and the symbols for ahead and behind
 GIT_PROMPT_UNTRACKED="${CYAN}…"       # the number of untracked files/dirs
 GIT_PROMPT_STASHED="${BLUE}⚑"     # the number of stashed files/dir
-GIT_PROMPT_CLEAN="${BRIGHTGREEN}✔"      # a colored flag indicating a "clean" repo
+GIT_PROMPT_CLEAN="${GREEN}✔"      # a colored flag indicating a "clean" repo
 
 GIT_PROMPT_COMMAND_OK="${Green}✔ "    # indicator if the last command returned with an exit code of 0
 GIT_PROMPT_COMMAND_FAIL="${Red}✘ "   # indicator if the last command returned with an exit code of other than 0
 
-GIT_PROMPT_START_USER="[${PathShort}${ResetColor}"
+GIT_PROMPT_START_USER="[${PathShort}${ResetColor}]"
 GIT_PROMPT_START_ROOT="[${PathShort}${ResetColor}"
-GIT_PROMPT_END_USER="${White}${ResetColor}]$ "
+GIT_PROMPT_END_USER="${White}${ResetColor}$ "
 GIT_PROMPT_END_ROOT="${White}${ResetColor}]# "
 
 # Please do not add colors to these symbols
