@@ -16,6 +16,7 @@ if [ -d ~/bash_completion.d ]; then
 fi
 
 #[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
 
 [[ -s /home/ahawthorne/.nvm/nvm.sh ]] && . /home/ahawthorne/.nvm/nvm.sh # This loads NVM
 
@@ -28,3 +29,9 @@ fi
 
 export BUNGLER="rails rake rspec cucumber knife pickler"
 [[ -s "$HOME/.bungler/bungler" ]] && . $HOME/.bungler/bungler
+
+# Set config variables first
+GIT_PROMPT_ONLY_IN_REPO=1
+
+# as last entry source the gitprompt script
+source ~/.bash-git-prompt/gitprompt.sh
