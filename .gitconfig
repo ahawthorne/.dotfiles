@@ -42,3 +42,8 @@
 
 [push]
 	default = simple
+[alias]
+  untracked = ls-files --others --exclude-standard
+  co = checkout
+  stat = status
+  vis = log --oneline --graph --all --decorate --abbrev-commit

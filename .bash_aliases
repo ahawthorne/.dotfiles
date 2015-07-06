@@ -7,6 +7,8 @@ alias gpw="apg -n20 -m20 -MNCLS -p7 -a1 -E \\\/\\\`\>\<\\\"\'\\\\ -r /usr/share/
 alias rspecd="rspec --format documentation"
 alias cucumberd="cucumber --format pretty"
 
+alias pass="openssl rand -base64 27 | cut -c1-27"
+
 function apg_bloom() {
   apgbfm -d /usr/share/dict/words  -f ~/bloomfile
   apgbfm -i ~/bloomfile

@@ -1,45 +1,49 @@
+source ~/.vim/.bundle
 set nocompatible
-set t_Co=16
+" set t_Co=16
 
 set mouse=a
-source ~/.vim/.bundle
 
 set nowrap
 
+" tabs and indenting
+syntax on
+filetype on
 filetype plugin on
 filetype indent on
-" tabs and indenting
-set ai
-set nosi
-set nu
-
 set tabstop=2
 set shiftwidth=2
+set number
 set expandtab
-" set tabstop=3
-" set softtabstop=0
-" set shiftwidth=3
-" set noexpandtab
+set nosmartindent
 set autoindent
 set copyindent
 set smarttab
-
 
 " use unix style line ednings
 set ff=unix
 set ffs=unix
 set foldmethod=marker
-
 set pastetoggle=<F2>
 
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_guide_size = 1
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=235
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=236
+
 " let g:solarized_termcolors=256
-colorscheme ir_black
+" colorscheme ir_black
 se background=dark
+se t_Co=256
+colorscheme monokai
+" disable background color erase
+se t_ut=
 set gfn=Droid\ Sans\ Mono\ 11
 set dir=/tmp
 set bdir=/tmp
 "set diffexpr=MyDiff()
-:hi Search guibg=Yellow guifg=black
+" :hi Search guibg=Yellow guifg=black
 set hlsearch
 set incsearch
 
@@ -47,24 +51,18 @@ set incsearch
 au BufNewFile,BufRead *.htm7 set filetype=html
 au! BufRead,BufNewFile *.vm  setfiletype velocity
 
-let g:neocomplcache_enable_at_startup = 0
-"let g:neocomplcache_disable_auto_complete = 1
-let g:neocomplcache_min_syntax_length = 3
-" Plugin key-mappings.
-imap <C-k>     <Plug>(neocomplcache_snippets_expand)
-smap <C-k>     <Plug>(neocomplcache_snippets_expand)
-inoremap <expr><C-g>     neocomplcache#undo_completion()
-inoremap <expr><C-l>     neocomplcache#complete_common_string()
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplcache#close_popup()
-inoremap <expr><C-e>  neocomplcache#cancel_popup()
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+let g:syntastic_mode_map = { 'mode': 'active',
+                           \ 'passive_filetypes': ['haml'] }
+let g:syntastic_ruby_checkers = ['mri', 'rubocop']
+
 " Enable omni completion. Not required if they are already set elsewhere in
 " .vimrc
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -72,6 +70,13 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+"python from powerline.vim import setup as powerline_setup
+"python powerline_setup()
+"python del powerline_setup
+
+"set rtp+=/lib/python2.7/site-packages/powerline/bindings/vim/
+"set laststatus=2
 
 " clean formatting for css
 ":%s/\n\+\s*//g
@@ -98,17 +103,16 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 ":endwhile
 "gg=G
 
-map <F9> :%s/\n\+\s*//g<CR>:%s/:[ ]*/:/g<CR>:%s/}/}\r\r/g<CR>:%s/;/;\r\t/g<CR>:%s/[ ]*{/ {\r\t/g<CR>:%s/\(\t\)\?\/\*\(.*\)\*\//\1\/\*\r\1\2\r\1\*\/\r\1/ge<CR>:%s/\(\t\)\?\/\*/\1\/\*\r\1/ge<CR>:%s/\(\n\+\)\?\(\t\)\?\*\//\r\2\*\/\r\2\1\2/ge<CR>:%s/^\t}/}/g<CR>:%s/\t\([^:]\+\):/\t\1: /g<CR>:%s/[ ]*!important/ !important/ge<CR>:%s/\t\n//ge<CR>:%s/\n\{3,\}/\r\r/ge<CR>:%s/\(\n^$\)\{2,\}//ge<CR>:let err=0<CR>:while err == 0<CR>try<CR> %s/^\([^,\t]\+\),\([^$]\)/\1,\r\2/g<CR>catch /^Vim\%((\a\+)\)\=:E/<CR>endtry<CR>:endwhile<CR>gg=G<CR>
+"map <F9> :%s/\n\+\s*//g<CR>:%s/:[ ]*/:/g<CR>:%s/}/}\r\r/g<CR>:%s/;/;\r\t/g<CR>:%s/[ ]*{/ {\r\t/g<CR>:%s/\(\t\)\?\/\*\(.*\)\*\//\1\/\*\r\1\2\r\1\*\/\r\1/ge<CR>:%s/\(\t\)\?\/\*/\1\/\*\r\1/ge<CR>:%s/\(\n\+\)\?\(\t\)\?\*\//\r\2\*\/\r\2\1\2/ge<CR>:%s/^\t}/}/g<CR>:%s/\t\([^:]\+\):/\t\1: /g<CR>:%s/[ ]*!important/ !important/ge<CR>:%s/\t\n//ge<CR>:%s/\n\{3,\}/\r\r/ge<CR>:%s/\(\n^$\)\{2,\}//ge<CR>:let err=0<CR>:while err == 0<CR>try<CR> %s/^\([^,\t]\+\),\([^$]\)/\1,\r\2/g<CR>catch /^Vim\%((\a\+)\)\=:E/<CR>endtry<CR>:endwhile<CR>gg=G<CR>
 
 " sort css attributes
-map <A-F12> :%s/[ ]\+$//ge<CR>:let _srch=search('{','W')<CR>viB:sort<CR>:if _srch == 0<CR>:echoerr "Sort reached bottom"<CR><ESC>:endif<CR><C-C><A-F12>
+"map <A-F12> :%s/[ ]\+$//ge<CR>:let _srch=search('{','W')<CR>viB:sort<CR>:if _srch == 0<CR>:echoerr "Sort reached bottom"<CR><ESC>:endif<CR><C-C><A-F12>
 
-map <leader>gt :call TimeLapse()<CR>
+"map <leader>gt :call TimeLapse()<CR>
 
-vmap <F11> <Esc>:'<,'><<<<<CR>:'<,'>s/^\(.*\)$/\t$sql .= " \1 ";/<CR>/$sql<CR>
+"vmap <F11> <Esc>:'<,'><<<<<CR>:'<,'>s/^\(.*\)$/\t$sql .= " \1 ";/<CR>/$sql<CR>
 "vmap <F12> <Esc>:'<,'>s/^.*= "//<CR>:'<,'>s/".*$//<CR>:SQLUFormatStmts<CR>/SELECT\\|INSERT\\|UPDATE\\|DELETE<CR>
-nmap __gf <Esc>:tabe %:p:h/<C-R><C-F><CR>
-"map <F12> :%!tidy -q -i --wrap 0 -utf8 --tidy-mark 0 2>/dev/null<CR>
+" nmap __gf <Esc>:tabe %:p:h/<C-R><C-F><CR>
 
 function MyDiff()
   let opt = '-a --binary '
@@ -147,9 +151,6 @@ function! Preserve(command)
 endfunction
 
 function! KillWhitey()
-  "Double blank lines
-  "call Preserve("%s/\n\{3,}/\r\r/e %s/\\s\\+$//e")
-  "Whitespace
   call Preserve("%s/\\s\\+$//e")
 endfunction
 

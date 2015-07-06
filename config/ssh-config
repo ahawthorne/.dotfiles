@@ -1,7 +1,12 @@
+IdentityFile /home/ahawthorne/.ssh/id_ecdsa
+Protocol 2
+#IdentityFile ~/.ssh/id_rsa
+
 host *
   ServerAliveInterval 120
+  GSSAPIAuthentication no
 
-host *.domain7.com *.domain7.net *.jibc.ca
+host *.domain7.com *.domain7.net
   ControlMaster auto
   ControlPath ~/tmp/%r@%h:%p
   Compression yes
