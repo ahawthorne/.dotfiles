@@ -62,6 +62,7 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_mode_map = { 'mode': 'active',
                            \ 'passive_filetypes': ['haml'] }
 let g:syntastic_ruby_checkers = ['mri', 'rubocop']
+let g:syntastic_javascript_checkers = ['eslint']
 
 " Enable omni completion. Not required if they are already set elsewhere in
 " .vimrc
@@ -70,6 +71,15 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+function! s:FixHash(line1,line2)
+  let l:save_cursor = getpos(".")
+  "silent! execute ':' . a:line1 . ',' . a:line2 . 's/:\([a-z0-9_]\+\)\s*=>/\1:/g'
+  silent! execute ':' . a:line1 . ',' . a:line2 . 's/\%(''\|:\)\([a-z0-9_]\+\)\%(\s*=>\|''\s*=>\|'':\)/\1:/g'
+  call setpos('.', l:save_cursor)
+endfunction
+
+command! -range=% FixHash call <SID>FixHash(<line1>,<line2>)
 
 "python from powerline.vim import setup as powerline_setup
 "python powerline_setup()
